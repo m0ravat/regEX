@@ -29,12 +29,18 @@ Ninja - Looks for Ninja.
 \Q..\E - Quote a literal sequence, \Q$.^*()\E will match the string $.^*()  
 
 ## Special Characters
-? - Makes the character before it optional, it can appear once or not come at all.   
-+ - Matches the previous character 1 or more times, [1-9]0+ would match 10 but also 100000.  
-* - Previous character matches 0 to many times, a merge of the 2 previous. Minimum of 0, no maximum amount of times.  
-^ - Defines start of expression, e.g: ^[0-9]{11}  
-$ - Defines end of expression, e.g: [0-9]{11}$  
-If we had a telephone number of 079832234582 (12 characters) ^[0-9]{11} would find a match for the first 11 characters, while [0-9]{11}$ would match the last 11 characters. To match only valid 11 digit phone numbers you combine them to make the expression: ^[0-9]{11}$  
+- `?` – Makes the character before it optional; it can appear once or not come at all.
+- `+` – Matches the previous character one or more times. Example: `[1-9]0+` would match `10` but also `100000`.
+- `*` – Matches the previous character zero or more times. A merge of the two previous quantifiers: minimum of 0, no maximum.
+- `^` – Defines the **start** of an expression. Example: `^[0-9]{11}`
+- `$` – Defines the **end** of an expression. Example: `[0-9]{11}$`
+
+If we had a telephone number like `079832234582` (12 characters):
+
+- `^[0-9]{11}` would match the **first** 11 digits.
+- `[0-9]{11}$` would match the **last** 11 digits.
+- To match **only** valid 11-digit phone numbers, use: `^[0-9]{11}$`
+
 
 ## Extra Java Specific RegEX
 
