@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body class="container">
+    <h1>Welcome to my funny name switcher</h1>
+    <p>For those wondering what this application is about, it allows you to submit a block of text and swap a word/name for something else.
+        This can be used for fixing regular grammar mistakes you might make like turning youre into you're or to 
+        copy a block of text from wikipedia and change every reference of a person to Adolf Hitler.
+    </p>
+    <form id="form">
+        <div class="mb-3">
+            <label for="pattern1" class="form-label">The pattern you want to get rid of</label>
+            <input type="text" class="form-control" id="pattern1" name="pattern1">
+        </div>
+        <div class="mb-3">
+            <label for="pattern2" class="form-label">The new pattern</label>
+            <input type="text" class="form-control" id="pattern2" name="pattern2"> 
+        </div>
+        <div class="mb-3">
+            <label for="textInput" class="form-label">The text you want to alter</label>
+            <textarea class="form-control" id="textInput" rows="3" name="textInput"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Default file input example</label>
+            <input class="form-control" type="file" id="formFile">
+        </div>
+        <button type="submit" class="btn btn-primary">Alter text</button>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Text you wanted altered</label> <br>
+            <div id="valid"></div>
+            <textarea class="form=control" readonly id="newText" rows="10" cols="80%"></textarea>
+        </div>
+    </form>
+    <script>
+        document.getElementById("form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const pattern1 = formData.get("pattern1")
+            const swap = formData.get("pattern2")
+            const textInput = formData.get("textInput")
+            const newPattern = escapeRegExp(pattern1)
+            const regex = new RegExp(newPattern, "g");
+
+            const isMatch = textInput.match(regex);            
+            if (isMatch){
+                totalMatches = isMatch.length;
+                document.getElementById("valid").innerText=`Amount of Matches: ${totalMatches}`
+                const replacedText = textInput.replace(regex, swap);
+                document.getElementById("newText").value = replacedText;                   
+            } else{
+                document.getElementById("valid").innerText="No match was found for the first pattern"
+            }
+
+        })
+        function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</body>
+</html>
