@@ -51,3 +51,102 @@ If we had a telephone number like `079832234582` (12 characters):
 | `\p{P}`  | Any punctuation         | `\p{P}` matches `. , ! ?` etc.         |  
 | `\p{Zs}` | Any space separator     | More specific than `\s`                |  
 | `\P{L}`  | Not a letter (negation) | Like `[^a-zA-Z]` but for all scripts   |  
+
+## JS Related regex functions
+
+| Method                               | Description               | Return Value  |
+| ------------------------------------ | ------------------------- | ------------- |
+| `string.match(regex)`                | Get matches in string     | Array or null |
+| `string.replace(regex, replacement)` | Replace matches           | New string    |
+| `string.search(regex)`               | Find index of first match | Index or -1   |
+| `string.split(regex)`                | Split string by regex     | Array         |
+| `regex.test(string)`                 | Check if regex matches    | Boolean       |
+| `regex.exec(string)`                 | Get detailed match info   | Array or null |
+
+## JS Related syntax
+ Basic Constructs
+Literal characters: /abc/ matches "abc"
+
+Character classes: [abc] matches any one of "a", "b", or "c"
+
+Ranges: [a-z], [0-9]
+
+Negated classes: [^abc] matches any character except "a", "b", or "c"
+
+Dot (.) matches any single character except newline
+
+2. Quantifiers
+* — 0 or more times
+
++ — 1 or more times
+
+? — 0 or 1 time (makes preceding token optional)
+
+{n} — exactly n times
+
+{n,} — at least n times
+
+{n,m} — between n and m times
+
+Example: /a{2,4}/ matches "aa", "aaa", or "aaaa"
+
+3. Anchors
+^ — start of string (or line with multiline flag)
+
+$ — end of string (or line with multiline flag)
+
+\b — word boundary
+
+\B — not a word boundary
+
+4. Groups and Capturing
+Parentheses ( ... ) to create capture groups
+
+Example: /(\d{3})-(\d{2})/ matches "123-45" and captures "123" and "45"
+
+Non-capturing groups (?: ... ) — group without capturing for backreference
+
+5. Alternation
+| acts like OR
+
+Example: /cat|dog/ matches "cat" or "dog"
+
+6. Character Escaping
+Escape special characters with \ like \., \*, \+, \?, \\
+
+7. Flags
+g — global match (find all matches, not just first)
+
+i — case-insensitive match
+
+m — multiline mode (^ and $ match start/end of lines)
+
+s — dotall mode (dot matches newline too)
+
+u — Unicode mode
+
+y — sticky mode (match at lastIndex only)
+
+8. Lookahead and Lookbehind (ES2018+)
+Positive lookahead: foo(?=bar) matches "foo" only if followed by "bar"
+
+Negative lookahead: foo(?!bar) matches "foo" only if NOT followed by "bar"
+
+Positive lookbehind: (?<=foo)bar matches "bar" only if preceded by "foo"
+
+Negative lookbehind: (?<!foo)bar matches "bar" only if NOT preceded by "foo"
+
+9. Backreferences
+Refer to captured groups by number: \1, \2, etc.
+
+Example: /(\w)\1/ matches any character followed by itself, like "ee" or "ss"
+
+10. Unicode Property Escapes (ES2018+)
+Match Unicode categories: \p{Letter}, \p{Number}, etc. with the u flag
+
+Example: /\p{Emoji}/u matches emoji characters
+
+11. DotAll flag (s)
+Normally, dot (.) matches everything except newline characters.
+
+With s flag, dot matches newline too
