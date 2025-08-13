@@ -23,4 +23,47 @@ public class Main {
             System.out.println("No match");
         }
     }
+    public static void multiple()
+    {
+        // Making an instance of Pattern class
+        // By default quantifier "+" is Greedy
+        Pattern p = Pattern.compile("g+");
+
+        // Making an instance of Matcher class
+        Matcher m = p.matcher("ggg");
+
+        while (m.find()){
+            System.out.println("Pattern found from " + m.start() +
+                    " to " + (m.end()-1));
+        }
+    }
+    public static void reluctant()
+    {
+        // Making an instance of Pattern class
+        // Here "+" is a Reluctant quantifier because
+        // a "?' is appended after it.
+        Pattern p = Pattern.compile("g+?");
+
+        // Making an instance of Matcher class
+        Matcher m = p.matcher("ggg");
+
+        while (m.find()){
+            System.out.println("Pattern found from " + m.start() +
+                    " to " + (m.end()-1));
+        }
+    }
+    public static void possessive() {
+        // Making an instance of Pattern class
+        // Here "+" is a Possessive quantifier because
+        // a "+' is appended after it.
+        Pattern p = Pattern.compile("g++");
+
+        // Making an instance of Matcher class
+        Matcher m = p.matcher("ggg");
+
+        while (m.find()) {
+            System.out.println("Pattern found from " + m.start() +
+                    " to " + (m.end() - 1));
+        }
+    }
 }
